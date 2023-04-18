@@ -3,8 +3,11 @@
  * This is especially useful for Docker builds.
  */
 !process.env.SKIP_ENV_VALIDATION && (await import("./src/env.mjs"));
+import { withAxiom } from 'next-axiom'
+
 
 /** @type {import("next").NextConfig} */
+
 const config = {
   reactStrictMode: true,
   experimental: {
@@ -21,5 +24,6 @@ const config = {
   //   locales: ["en"],
   //   defaultLocale: "en",
   // },
-};
-export default config;
+}
+
+export default withAxiom(config);
