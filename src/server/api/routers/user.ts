@@ -40,4 +40,30 @@ export const userRouter = createTRPCRouter({
             });
             return user;
         }),
-});
+    //user upsert
+    upsert: publicProcedure
+        .input(z.object({ id: z.string(), name: z.string()}))
+        .mutation(async ({ input, ctx }) => {
+            const user = await ctx.prisma.user.upsert({
+                where: { id: input.id },
+                update: {
+                    UserName: input.name,
+                },
+                create: {
+                    UserName: input.name,
+                },
+            });
+            return user;
+        }
+        ),
+        //get user by id
+        getById: publicProcedure
+            .input(z.object({ id: z.string()}))
+            .query(async ({ input, ctx }) => {
+                const user = await ctx.prisma.user.findUnique({
+                    where: { id: input.id },
+                });
+                return user;
+            }
+            ),
+        });

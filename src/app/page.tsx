@@ -1,6 +1,6 @@
-
-
-
 export default function Page(){
-    return(<><div>this</div></>)
+
+    return(<>
+
+    <div>this</div></>)
 }
